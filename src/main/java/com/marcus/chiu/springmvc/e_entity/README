@@ -1,0 +1,77 @@
+1. What is @Id and @GeneratedValue?
+
+@Id annotation :
+    - is inherited from javax.persistence.Id
+    - indicates member below is the primary id
+
+@GeneratedValue :
+    - configures the way of incrementing
+    - for example, when using MySQl 'auto-increment' in database
+      use @GeneratedValue(strategy = GenerationType.IDENTITY)
+      to denote that you also acknowledged to use this database
+      server side strategy
+    - GenerationType.IDENTITY - supports identity columns in DB2, MySQL, MS SQL Server,
+      Sybase and HypersonicSQL. The returned identifier is of type long, short or int.
+    - GenerationType.AUTO - also works with MySQL
+
+http://stackoverflow.com/questions/20603638/what-is-the-use-of-annotations-id-and-generatedvaluestrategy-generationtype
+
+
+2. What's the difference between @Basic and @Column?
+
+@Basic :
+    - signifies attribute to be persisted
+    - allows lazy-loading, nullable, etc.
+
+@Column :
+    - allows you to specify a name of database column
+
+Can use both @Basic and @Column annotations
+@Basic(fetch=FetchType.LAZY)
+@Column(name="WIBBLE")
+
+
+3. What is @Access(AccessType.PROPERTY)
+           @Access(AccessType.FIELD) <----- DEFAULT
+
+- @Access(AccessType.PROPERTY)
+  private String text
+
+  - will use the getter and setter methods (ei. setText() getText())
+    to set and get value of String text
+  - when using this, must define the setter and getter methods
+
+- @Access(AccessType.FIELD)
+  private String text
+
+  - will not use setText() nor getText() methods, but access the String
+    text itself directly to get and set its value
+  - do not need to define the setter and getter methods
+  - this is the DEFAULT
+
+
+4. Difference between @NotNull, @NotEmpty, and @NotBlank
+
+@NotNull: The CharSequence, Collection, Map or Array object is not null, but can be empty.
+@NotEmpty: The CharSequence, Collection, Map or Array object is not null and size > 0.
+@NotBlank: The string is not null and the trimmed length is greater than zero.
+
+String name = null;
+@NotNull: false
+@NotEmpty: false
+@NotBlank: false
+
+String name = "";
+@NotNull: true
+@NotEmpty: false
+@NotBlank: false
+
+String name = " ";
+@NotNull: true
+@NotEmpty: true
+@NotBlank: false
+
+String name = "Great answer!";
+@NotNull: true
+@NotEmpty: true
+@NotBlank: true

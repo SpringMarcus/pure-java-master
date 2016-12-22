@@ -1,0 +1,30 @@
+Difference between @Component, @Controller, @Service, @Repository
+- @Component is a generic stereotype of any Spring-managed component
+- @Controller, @Service and @Repository are specializations of @Component
+- @Controller is used for presentation layer (exp. used in Controller)
+- @Service is used in service layer (exp. used in EmployeeService)
+- @Repository is used in persistence layer (exp. used in Employee class)
+
+Therefore, you can annotate your component classes with @Component,
+but by annotating them with @Repository, @Service, or @Controller instead,
+your classes are more properly suited for processing by tools or associating with aspects.
+For example, these stereotype annotations make ideal targets for pointcuts.
+
+@Component is equivalent to <bean>
+@Service, @Controller , @Repository = {@Component + some more special functionality}
+
+1. @Controller: where your request mapping from presentation page done i.e.
+    Presentation layer won't go to any other file it goes directly to @Controller class and check
+    for requested path in @RequestMapping annotation which written before method calls if necessary.
+
+2. @Service: All business logic is here i.e. Data related calculations and all.This annotation
+    of business layer in which our user not directly call persistence method so it will call this
+    methods using this annotation. It will request @Repository as per user request
+
+3. @Repository:This is Persistence layer(Data Access Layer) of application which used to get data
+    from database. i.e. all the Database related operations are done by repository.
+
+4. @Component - Annotate your other components (for example REST resource classes) with component
+    stereotype.
+
+http://stackoverflow.com/questions/6827752/whats-the-difference-between-component-repository-service-annotations-in
