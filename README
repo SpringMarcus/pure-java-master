@@ -2,3 +2,7 @@ This project has been built of from
 http://websystique.com/springmvc/spring-4-mvc-and-hibernate4-integration-example-using-annotations/
 
 Make sure to connect to a database with the ddl.spl script
+
+edit the application.properties file in the /src/main/resources directory for MySQL credentials
+
+connect to Tomcat Server and run this baby!
