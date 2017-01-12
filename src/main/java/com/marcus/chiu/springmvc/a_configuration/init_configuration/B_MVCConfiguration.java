@@ -43,6 +43,7 @@ public class B_MVCConfiguration extends WebMvcConfigurationSupport {
 
     /**
      * Adding static resources
+     * more at http://www.baeldung.com/spring-mvc-static-resources
      * @param registry
      */
     @Override
@@ -56,8 +57,14 @@ public class B_MVCConfiguration extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/image/**").addResourceLocations("/resources/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
 
-        // configuring multiple locations for a resource
-        // registry.addResourceHandler("/resources/**").addResourceLocations("/resources/","classpath:/other-resources/");
+        ////////////
+        // extras //
+        ////////////
+//        registry.addResourceHandler("/resources/**")
+//                .addResourceLocations("/resources/","classpath:/other-resources/") // configuring multiple locations for a resource
+//                .setCachePeriod(3600) // The resources served will be cached in the browser for 3600 seconds.
+//                .resourceChain(true) // chain is finally configured
+//                .addResolver(new PathResourceResolver()); // registering the PathResourceResolver in the resource chain as the sole ResourceResolver in it
     }
 
     ///////////
