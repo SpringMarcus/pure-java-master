@@ -125,6 +125,14 @@
             <version>1.3.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+        <!-- for BasicDataSource bean -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>

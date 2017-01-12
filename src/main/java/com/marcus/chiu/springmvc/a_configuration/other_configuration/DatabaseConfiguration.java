@@ -1,5 +1,6 @@
 package com.marcus.chiu.springmvc.a_configuration.other_configuration;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,7 +111,12 @@ public class DatabaseConfiguration {
     @Bean
     public DataSource dataSource() {
         //create new data source object
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+        // DriverManagerDataSource needs group id = 'org.springframework' artifact id = 'spring-jdbc' in maven
+        // DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+        // BasicDataSource needs 'commons-dbcp' in maven
+        BasicDataSource dataSource = new BasicDataSource();
 
         //start - set the data source object's configurations
 
@@ -122,6 +128,12 @@ public class DatabaseConfiguration {
         dataSource.setUsername(username);
         //set password of database
         dataSource.setPassword(password);
+
+        //Prevent MySQL timeouts
+        // http://blog.netgloo.com/2015/07/09/spring-boot-communications-link-failure-with-mysql-and-hibernate/
+        dataSource.setTestWhileIdle(true);
+        dataSource.setTimeBetweenEvictionRunsMillis(60000);
+        dataSource.setValidationQuery("SELECT 1");
 
         //end
 
