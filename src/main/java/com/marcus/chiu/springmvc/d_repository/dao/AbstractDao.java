@@ -23,7 +23,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     }
 
     /**
-     * SessionFactory created during Application start from HibernateConfiguration
+     * SessionFactory created during Application start from DatabaseConfiguration
      * will be used here
      */
     @Autowired

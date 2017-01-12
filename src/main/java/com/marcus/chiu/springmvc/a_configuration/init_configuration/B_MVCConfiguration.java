@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -82,6 +83,14 @@ public class B_MVCConfiguration extends WebMvcConfigurationSupport {
         //return View Resolver
         return viewResolver;
     }
+    // another way to configure a view resolver
+    /*@Bean
+    public InternalResourceViewResolver getInternalResourceViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+    }*/
 
     /**
      * In the case of a validation failure, default error messages are shown.
@@ -99,5 +108,19 @@ public class B_MVCConfiguration extends WebMvcConfigurationSupport {
 
         //return as MessageSource
         return messageSource;
+    }
+
+    /**
+     * Prerequisite - need 'commons-fileupload' in maven
+     * @return
+     */
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+
+        // sets max upload size a client can make to this server
+        commonsMultipartResolver.setMaxUploadSize(5242880);
+
+        return commonsMultipartResolver;
     }
 }

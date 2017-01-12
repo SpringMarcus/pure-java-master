@@ -3,6 +3,7 @@ package com.marcus.chiu.springmvc.a_configuration.other_configuration;
 import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +38,26 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan({"com.marcus.chiu.springmvc.a_configuration"})
 @PropertySource(value = {"classpath:application.properties"})
-public class HibernateConfiguration {
+public class DatabaseConfiguration {
+
+    /*
+     * Either use @Value("${}") to grab from properties
+     * which is configured from the PropertiesConfiguration
+     *
+     * Or use the Environment bean below
+     */
+
+    @Value("${jdbc.driverClassName}")
+    private String driverClassName;
+
+    @Value("${jdbc.url}")
+    private String url;
+
+    @Value("${jdbc.username}")
+    private String username;
+
+    @Value("${jdbc.password}")
+    private String password;
 
     /**
      * Spring has defined an 'Element' bean somewhere I don't know
@@ -95,13 +115,13 @@ public class HibernateConfiguration {
         //start - set the data source object's configurations
 
         //set database driver type
-        dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
+        dataSource.setDriverClassName(driverClassName);
         //set url of database
-        dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+        dataSource.setUrl(url);
         //set username of database
-        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+        dataSource.setUsername(username);
         //set password of database
-        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
+        dataSource.setPassword(password);
 
         //end
 
