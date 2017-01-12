@@ -8,9 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Created by marcus.chiu on 10/16/16.
@@ -26,7 +29,39 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.marcus.chiu.springmvc")
 @Import({BusinessLogicConfiguration.class})
-public class b_AppConfiguration {
+public class B_MVCConfiguration extends WebMvcConfigurationSupport {
+
+    @PostConstruct
+    public void status() {
+        System.out.println("B_MVCConfig loaded");
+    }
+
+    ///////////////
+    // OVERRIDES //
+    ///////////////
+
+    /**
+     * Adding static resources
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // addResourceHandler() - configures the external facing URI path
+        // addResourceLocations() - maps that external facing URI path internally, to the physical path where the resources are actually located.
+        // Now – the following line in an html page would get us the myCss.css resource inside the webapp/resources directory
+        // <link href="<c:url value="/resources/myCss.css" />" rel="stylesheet">
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
+        registry.addResourceHandler("/image/**").addResourceLocations("/resources/images/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+
+        // configuring multiple locations for a resource
+        // registry.addResourceHandler("/resources/**").addResourceLocations("/resources/","classpath:/other-resources/");
+    }
+
+    ///////////
+    // BEANS //
+    ///////////
 
     /**
      * Configures a view resolver to identify the real view

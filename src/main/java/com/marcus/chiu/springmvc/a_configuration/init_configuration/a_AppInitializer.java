@@ -45,7 +45,7 @@ public class a_AppInitializer implements WebApplicationInitializer {
         </listener>
          */
         //register Configuration Class
-        ctx.register(b_AppConfiguration.class);
+        ctx.register(B_MVCConfiguration.class);
         ctx.setServletContext(servletContext);
 
         //we are using front-b_controller DispatcherServlet
