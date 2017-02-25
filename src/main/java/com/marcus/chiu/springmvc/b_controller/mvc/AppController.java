@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
@@ -42,7 +43,9 @@ public class AppController {
      * @return String - in this case Spring will find allemployees.jsp
      */
     @RequestMapping(value = {"/", "/list" }, method = RequestMethod.GET)
-    public String listEmployees(ModelMap modelMap) {
+    public String listEmployees(HttpServletResponse response, ModelMap modelMap) {
+        response.setContentType("text/html");
+
         List<Employee> employees = employeeService.findAllEmployees();
         modelMap.addAttribute("employees", employees);
         return "allemployees";
