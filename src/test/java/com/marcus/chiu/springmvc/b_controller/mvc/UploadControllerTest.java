@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -24,7 +25,8 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = {a_AppInitializer.class})
 //@WebAppConfiguration not needed because a_AppInitializer.class implements WebApplicationInitializer
 public class UploadControllerTest {
@@ -40,6 +42,7 @@ public class UploadControllerTest {
         // this must be called for the @Mock annotations above to be processed
         // and for the mock service to be injected into the controller under
         // test.
+        // or just uncomment @RunWith(MockitoJUnitRunner.class)
         MockitoAnnotations.initMocks(this);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(uploadControllerUnderTest).build();

@@ -28,7 +28,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {a_AppInitializer.class})
 //@WebAppConfiguration not needed because a_AppInitializer.class implements WebApplicationInitializer
 public class AppControllerTest {
@@ -47,6 +47,7 @@ public class AppControllerTest {
         // this must be called for the @Mock annotations above to be processed
         // and for the mock service to be injected into the controller under
         // test.
+        // or just uncomment @RunWith(MockitoJUnitRunner.class)
         MockitoAnnotations.initMocks(this);
 
         mockMvc = MockMvcBuilders.standaloneSetup(appControllerUnderTest).build();
