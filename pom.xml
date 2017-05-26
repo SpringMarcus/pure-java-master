@@ -4,7 +4,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- POM e_entity version (always 4.0.0) -->
+    <!-- The modelVersion element sets what version of the POM model
+    you are using. Use the one matching the Maven version you are using.
+    Version 4.0.0 matches Maven version 2 and 3. -->
     <modelVersion>4.0.0</modelVersion>
 
     <!-- group or organization that this project belongs to
